@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "PAQ-T1"
+  "defaultProject": "PAQ-T1",
+  "cli": {
+    "analytics": "ae78d2fa-ea9e-4c20-ba94-65697577c909"
+  }
 }
