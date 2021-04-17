@@ -1,4 +1,14 @@
-<p>templates-list works!</p>
-<div *ngFor="let template of templates">
-  {{template.name}}
-</div>
+<form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Wybierz template</mat-label>
+    <mat-select formControlName="id">
+      <mat-option [value]="template._id" *ngFor="let template of templates">
+        {{template.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+  <button mat-flat-button color="primary" type="submit" [disabled]="!templateForm.valid">Primary</button>
+</form>
+
+{{chosenTemplate.name}}
