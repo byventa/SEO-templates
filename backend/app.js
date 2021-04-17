@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const dataBaseConfig = require('./db');
 const Template = require('./models/template')
+
 mongoose.connect(dataBaseConfig, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
   console.log('Connected to database!');
 }).catch((err) => {
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS")
   next()
 })
+
 // POST TEMPLATE TO DATABASE
 app.post('/api/templates', (req, res, next) => {
 
@@ -42,7 +44,9 @@ app.post('/api/templates', (req, res, next) => {
       });
       console.log('ERROR TEMPLATE WAS NOT ADDED ' + err);
     })
+
 })
+
 // GET TEMPLATES FROM DATABASE
 app.get('/api/templates', (req, res, next) => {
   Template.find((err, data) => {

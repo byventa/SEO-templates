@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Template } from '../template.model'
+import { TemplateDataService } from '../../template-data.service'
 
 @Component({
   selector: 'app-templates-list',
@@ -7,27 +8,18 @@ import { Template } from '../template.model'
   styleUrls: ['./templates-list.component.scss']
 })
 export class TemplatesListComponent implements OnInit {
-  templates: Template[] = [
-    {
-      sections: {
-        html: "<h1>es gaming</h1",
-        css: ".siema{dziala:none;}"
-      },
-      _id: "607aec8272c6fe3af8386394",
-      name: "Template 1"
-    },
-    {
-      sections: {
-        html: "<h1>es gaming</h1",
-        css: ".siema{dziala:none;}"
-      },
-      _id: "607b12746806d13c2c25ccb3",
-      name: "Template 2"
-    }];
+  templates: Template[] = [];
 
-  constructor() { }
+  constructor(private templateData: TemplateDataService) { }
 
   ngOnInit(): void {
+    this.getTemplatesData();
   }
 
+  getTemplatesData() {
+    return this.templateData.getTemplates().subscribe((res: any) => {
+      this.templates = res;
+      console.log(this.templates)
+    })
+  }
 }
