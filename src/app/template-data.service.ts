@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
-import { retry } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { PostHtml } from './templates/template.model';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-
+import { retry } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 
 export class TemplateDataService {
   url: string = 'http://localhost:3000/api/templates'
+  urlDownload: string = 'http://localhost:3000/download'
 
   constructor(private httpClient: HttpClient) { }
 
-  postTemplates() {
-
-  }
-  deleteTemplate() {
-
-  }
   getTemplates(): Observable<any> {
     return this.httpClient.get<any>(this.url)
       .pipe(retry(1));
   }
+  postHtmlFile(formData: PostHtml): Observable<PostHtml> {
+    return this.httpClient.post<PostHtml>(this.urlDownload, formData)
+  }
+
 }

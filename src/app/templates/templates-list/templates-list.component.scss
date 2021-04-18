@@ -1,0 +1,46 @@
+.download-form{
+  display: grid;
+  grid-template-columns: 100%;
+  .download-form-inputs{
+    background-color: #f8f8f8;
+    padding: 1em;
+  }
+  mat-form-field{
+    width: 95%;
+  }
+}
+.template-form{
+  display: grid;
+  grid-template-columns: 100%;
+  margin: 1em 0;
+  gap: 1%;
+  h1{
+    width: 100%;
+    padding: 1em .75em;
+    margin:0;
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    font-weight: 100;
+    span{
+      color: #d02a42;
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .download-form{
+    grid-template-columns: max-content auto;
+    gap: 1%;
+    mat-form-field{
+      width: auto;
+    }
+  }
+  .template-form{
+    grid-template-columns:max-content max-content max-content;
+    h1{
+      padding: 0 .75em;
+    }
+  }
+}
+

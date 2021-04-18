@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
+*{
+  box-sizing: border-box;
+}
+html, body {  }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.template-form mat-form-field .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+.template-form mat-form-field .mat-form-field-wrapper .mat-form-field-underline {
+  bottom: 0;
+}
+
+.download-form mat-form-field{
+  // background: white;
+  padding: .5em;
+}
+.tinymce-editor{
+  height: 90vh;
+}
+.tox.tox-tinymce{
+height: 100%!important;
+}

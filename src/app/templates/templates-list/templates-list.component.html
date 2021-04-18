@@ -1,36 +1,56 @@
 <form [formGroup]="templateForm" (ngSubmit)="onSubmit()">
-  <mat-form-field appearance="fill">
-    <mat-label>Wybierz template</mat-label>
-    <mat-select formControlName="id">
-      <mat-option [value]="template._id" *ngFor="let template of templates">
-        {{template.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <button mat-flat-button color="primary" type="submit" [disabled]="!templateForm.valid">Primary</button>
+  <div class="template-form">
+    <h1><span>PAQ</span>-TEMPLATES</h1>
+    <mat-form-field appearance="fill">
+      <mat-label>Wybierz template</mat-label>
+      <mat-select formControlName="id">
+        <mat-option [value]="template._id" *ngFor="let template of templates">
+          {{template.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!templateForm.valid">Wybierz templatke</button>
+  </div>
 </form>
 
 <div *ngIf="chosenTemplate">
-  <form [formGroup]="downloadForm" (ngSubmit)="download()">
-    <mat-form-field class="example-full-width">
-      <mat-label>Nazwa pliku</mat-label>
-      <input formControlName="fileName" matInput placeholder="Np. drzwi-paqstudio">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Tytuł</mat-label>
-      <input formControlName="htmlTitle" matInput placeholder="Np. Paq-studio">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Opis</mat-label>
-      <textarea formControlName="htmlDesc" matInput placeholder="Np. Paq-studio | Okna"></textarea>
-    </mat-form-field>
+  <form [formGroup]="downloadForm" (ngSubmit)="createFile()">
+    <div class="download-form">
+      <div class="download-form-inputs">
+        <mat-form-field class="example-full-width" hintLabel="Add File Name">
+          <mat-label>Nazwa pliku</mat-label>
+          <input #fileNameInput formControlName="fileName" matInput placeholder="Np. drzwi-paqstudio">
+          <mat-error *ngIf="fileNameInput.value!.length < 1"> Enter a valid file name </mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width" hintLabel="Max 60 characters">
+          <mat-label>SERP Title</mat-label>
+          <input #titleInput formControlName="htmlTitle" matInput placeholder="Np. Paq-studio">
+          <mat-hint align="end"> {{titleInput.value?.length || 0}}/60</mat-hint>
+          <mat-error *ngIf="titleInput.value!.length < 1"> Enter a valid SERP title </mat-error>
+          <mat-error *ngIf="titleInput.value!.length > 60">You have more than 60 characters</mat-error>
+        </mat-form-field>
+        <br>
 
-    <editor formControlName="htmlBody" apiKey="yp2voxlg2kb13l14so983v7n2h9ip4pf41a4mmy1z3in9tbm" initialValue=""
-      plugins="print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons"
-      toolbar="undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl"
-      menubar="file edit view insert format tools table help" [init]="templateCss">
-    </editor>
-    <button mat-flat-button color="primary" [disabled]="!downloadForm.valid">Download</button>
+        <mat-form-field class="example-full-width" hintLabel="Max 160 characters">
+          <mat-label>SERP Description</mat-label>
+          <textarea #descInput formControlName="htmlDesc" matInput placeholder="Np. Paq-studio | Okna"></textarea>
+          <mat-hint align="end"> {{descInput.value?.length || 0}}/160</mat-hint>
+          <mat-error *ngIf="descInput.value!.length < 1"> Enter a valid SERP description </mat-error>
+          <mat-error *ngIf="descInput.value!.length > 160">You have more than 160 characters </mat-error>
+        </mat-form-field>
+        <br> <br>
+
+        <button mat-flat-button color="primary" [disabled]="!downloadForm.valid">Pobierz plik</button>
+
+      </div>
+      <div>
+        <editor formControlName="htmlBody" apiKey="yp2voxlg2kb13l14so983v7n2h9ip4pf41a4mmy1z3in9tbm" initialValue=""
+          plugins=" preview paste image importcss autolink directionality code visualblocks visualchars fullscreen link codesample table charmap hr anchor insertdatetime lists wordcount imagetools textpattern noneditable charmap quickbars emoticons"
+          toolbar="undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat  | charmap emoticons | fullscreen  preview visualblocks |    link  codesample | ltr rtl"
+          menubar="edit view insert format tools table " [init]="templateCss" class="tinymce-editor">
+        </editor>
+      </div>
+    </div>
   </form>
 </div>
