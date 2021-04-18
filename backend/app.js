@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const dataBaseConfig = require('./db');
 const Template = require('./models/template')
+const { createFile } = require('./createHtmlFile')
+
 
 mongoose.connect(dataBaseConfig, { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
   console.log('Connected to database!');
@@ -73,5 +75,7 @@ app.get('/api/templates/:slug', (req, res, next) => {
     })
   }
 })
-// app.get('/download', (req, res, next) => res.download('./src/assets/try.txt'))
+app.post('/download', (req, res, next) => {
+  createFile('es')
+})
 module.exports = app;

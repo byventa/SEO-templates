@@ -7,13 +7,15 @@ import { TemplatesListComponent } from './templates/templates-list/templates-lis
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+// TINY MCE EDITOR
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 // ANGULAR MATERIAL
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { TemplateEditorComponent } from './templates/template-editor/template-editor.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { TemplateEditorComponent } from './templates/template-editor/template-ed
     MatChipsModule,
     ReactiveFormsModule,
     FormsModule,
+    EditorModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

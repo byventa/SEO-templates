@@ -10,16 +10,17 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./templates-list.component.scss']
 })
 export class TemplatesListComponent implements OnInit {
+
+  // VARIABLES
+  templates: Template[] = [];
+  chosenTemplate: any;
+  templateCss: any;
+  // Forms
   // FORM
   templateForm = this.fb.group({
     id: ['', Validators.required]
   })
-
-  // VARIABLES
-  templates: Template[] = [];
-  submited: boolean = false;
-  chosenTemplate: any = [];
-
+  downloadForm: any;
   constructor(private templateData: TemplateDataService, private fb: FormBuilder) {
   }
 
@@ -35,7 +36,18 @@ export class TemplatesListComponent implements OnInit {
   }
 
   onSubmit() {
-    this.submited = true;
     this.chosenTemplate = this.templates.find(x => x._id === this.templateForm.value.id)
+    this.templateCss = { content_style: this.chosenTemplate.sections.css }
+    console.log(this.chosenTemplate)
+    console.log(this.templateCss)
+    this.downloadForm = this.fb.group({
+      fileName: ['', Validators.required],
+      htmlTitle: ['', Validators.required],
+      htmlDesc: ['', Validators.required],
+      htmlBody: [this.chosenTemplate.sections.html, Validators.required]
+    })
+  }
+  download() {
+    console.log(this.downloadForm.value);
   }
 }
